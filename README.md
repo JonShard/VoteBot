@@ -6,9 +6,9 @@ VRChat is a PC game for taking talking with other people using with or without a
 VoteBot is a discord bot that lets people use discord to vote on which songs should be present in the karaoke world. It gathers votes in the form of reactions from a discord text channel and sends SQL queries to a database managing the 
 
 ## Usage
-VoteBot can be triggered by a user with the proper role.      
+VoteBot can be triggered by a user with the proper role.  
 | Commands | Arguments | Required Role | Description |  
-| --- | --  | --- | --- |  
+| --- | --- | --- | --- |  
 | !openVote | | SongMaster | Posts a list of all available songs in a channel as individual messages and lets user add reactions to the songs they want. |  
 | !displayList | | KarokeUser | Post the list of all available songs. |  
 | !vote | int | KarokeUser | Vote for the song with id. |  
