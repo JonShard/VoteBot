@@ -8,7 +8,7 @@ VoteBot is a discord bot that lets people use discord to vote on which songs sho
 ## Usage
 VoteBot can be triggered by a user with the proper role.      
 | Commands             | Arguments | Required Role | Description                                                                                                                 |  
-|----------------------|-----------|---------------|-----------------------------------------------------------------------------------------------------------------------------|  
+| -------------------- | --------- | ------------- | --------------------------------------------------------------------------------------------------------------------------- |  
 | !openVote            |           | SongMaster    | Posts a list of all available songs in a channel as individual messages and lets user add reactions to the songs they want. |  
 | !displayList         |           | KarokeUser    | Post the list of all available songs.                                                                                       |  
 | !vote                | int       | KarokeUser    | Vote for the song with id.                                                                                                  |  
