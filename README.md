@@ -7,16 +7,16 @@ VoteBot is a discord bot that lets people use discord to vote on which songs sho
 
 ## Usage
 VoteBot can be triggered by a user with the proper role.      
-| Commands             | Arguments | Required Role | Description                                                                                                                 |  
-| -------------------- | --------- | ------------- | --------------------------------------------------------------------------------------------------------------------------- |  
-| !openVote            |           | SongMaster    | Posts a list of all available songs in a channel as individual messages and lets user add reactions to the songs they want. |  
-| !displayList         |           | KarokeUser    | Post the list of all available songs.                                                                                       |  
-| !vote                | int       | KarokeUser    | Vote for the song with id.                                                                                                  |  
-| !search              | string    | KarokeUser    | Search for a song where song tile contains the sub-string.                                                                  |  
-| !closeVote           |           | SongMaster    | Counts all votes, posts result in the text channel and sends the set number of most voted songs to the data base.           |  
-| !setSongLimit        | int       | SongMaster    | Change the number of songs are sent to the server.                                                                          |  
-| !setVoteCount        | int       | SongMaster    | Change the number of votes each user can submit.                                                                            |  
-| !setPatreonVoteCount | int       | SongMaster    | Change the number of additional votes users with the patreon role gets.                                                     |  
+| Commands | Arguments | Required Role | Description |  
+| --- | --  | --- | --- |  
+| !openVote | | SongMaster | Posts a list of all available songs in a channel as individual messages and lets user add reactions to the songs they want. |  
+| !displayList | | KarokeUser | Post the list of all available songs. |  
+| !vote | int | KarokeUser | Vote for the song with id. |  
+| !search | string | KarokeUser | Search for a song where song tile contains the sub-string. |  
+| !closeVote | | SongMaster | Counts all votes, posts result in the text channel and sends the set number of most voted songs to the data base. |  
+| !setSongLimit | int | SongMaster | Change the number of songs are sent to the server. |  
+| !setVoteCount | int | SongMaster | Change the number of votes each user can submit. |  
+| !setPatreonVoteCount | int | SongMaster | Change the number of additional votes users with the patreon role gets. |  
 
 ## Roadmap
 VoteBot is currently in development.
