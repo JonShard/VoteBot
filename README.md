@@ -21,7 +21,7 @@ Votebot can be triggered by a user with the proper role.
 
 ## Roadmap
 Votebot is currently in development.
-- [ ] !helloWorld command.
+- [x] !helloWorld command.
 - [ ] !displayList command.
 - [ ] !openVote command, with song data from database.
 - [ ] !vote command.
@@ -36,7 +36,8 @@ Votebot is currently in development.
 git clone repo
 cd Votebot
 make
-# Config file setup.
+cp docs/exampleConfig.yml bin/config.yml
+# Configure bin/config.yml
 bin/Votebot
 .
 .
