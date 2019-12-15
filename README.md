@@ -1,4 +1,4 @@
-# VoteBot 
+# Votebot 
 A discord bot for voting on karaoke songs for VRChat worlds in a discord channel.
 
 ## About
