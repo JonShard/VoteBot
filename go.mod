@@ -1,4 +1,4 @@
-module VoteBot
+module Votebot
 
 go 1.13
 

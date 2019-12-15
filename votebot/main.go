@@ -1,13 +1,12 @@
 package main
 
 import (
-	"errors"
+	"Votebot/votebot/bot"
 	"fmt"
 	"io/ioutil"
 	"log"
 	"os"
 	"os/signal"
-	"strings"
 	"syscall"
 
 	"github.com/bwmarrin/discordgo"
@@ -16,19 +15,9 @@ import (
 
 // Token contains the authorization token for communicating with discord.
 type config struct {
-	BotToken string `yaml:"botToken"`
-}
-
-// validates the message and splits it into an array of substings split on space.
-func parseMessage(m *discordgo.MessageCreate) ([]string, error) {
-
-	if len(m.Content) < 5 {
-		return nil, errors.New("message too short. No commands exist shorter than 5 chars")
-	}
-
-	substrings := strings.Split(m.Content, " ")
-
-	return substrings, nil
+	BotToken        string `yaml:"botToken"`
+	VotesPerUser    int    `yaml:"votesPerUser"`
+	VotesPerPateron int    `yaml:"votesPerPatreon"`
 }
 
 // reads config file from file into struct 'config'.
@@ -44,27 +33,6 @@ func readConfigFile(c *config) *config {
 	}
 
 	return c
-}
-
-// This function will be called (due to AddHandler above) every time a new
-// message is created on any channel that the autenticated bot has access to.
-func hellowWorldHandler(s *discordgo.Session, m *discordgo.MessageCreate) {
-
-	// Ignore all messages created by the bot itself
-	// This isn't required in this specific example but it's a good practice.
-	if m.Author.ID == s.State.User.ID {
-		return
-	}
-
-	message, err := parseMessage(m)
-	if err != nil {
-		fmt.Print(err)
-		return
-	}
-
-	if message[0] == "!hello" {
-		s.ChannelMessageSend(m.ChannelID, "World!")
-	}
 }
 
 func main() {
@@ -83,7 +51,7 @@ func main() {
 	}
 
 	// Register the messageCreate func as a callback for MessageCreate events.
-	dg.AddHandler(hellowWorldHandler)
+	dg.AddHandler(bot.HelloWorldHandler)
 
 	// Open a websocket connection to Discord and begin listening.
 	err = dg.Open()
