@@ -1,3 +1,4 @@
-botToken: randomly_generated_string_from_discord.
-votesPerUser: 5     # Every use gets this number of notes.
-votesPerPatreon: 5  # Paterons gets this number of extra votes.
+botToken: string      # Randomly generated string from discord.
+votesPerUser: int     # Every use gets this number of notes.
+votesPerPatreon: int  # Paterons gets this number of extra votes.
+textChannelID: string # ID of the text channel the bot should respond in.

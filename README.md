@@ -15,9 +15,11 @@ Votebot can be triggered by a user with the proper role.
 | !search | string | KarokeUser | Search for a song where song tile contains the sub-string. |  
 | !openVote | | SongMaster | Posts a list of all available songs in a channel as individual messages and lets user add reactions to the songs they want. |  
 | !closeVote | | SongMaster | Counts all votes, posts result in the text channel and sends the set number of most voted songs to the data base. |  
+| !setChannel |  | SongMaster | Change which channel the bot listens for commands in. This is the only command that works in any channel |  
 | !setSongLimit | int | SongMaster | Change the number of songs are sent to the server. |  
 | !setVoteCount | int | SongMaster | Change the number of votes each user can submit. |  
 | !setPatreonVoteCount | int | SongMaster | Change the number of additional votes users with the patreon role gets. |  
+
 
 ## Roadmap
 Votebot is currently in development.
@@ -27,6 +29,7 @@ Votebot is currently in development.
 - [ ] !vote command.
 - [ ] !closeVote command.
 - [ ] !search command.
+- [x] !setChannel command.
 - [ ] !setSongLimit command. 
 - [ ] !setVoteCount command.
 - [ ] !setPatreonVoteCount command.
@@ -38,7 +41,8 @@ cd Votebot
 make
 cp docs/exampleConfig.yml bin/config.yml
 # Configure bin/config.yml
-bin/Votebot
+cd bin
+./Votebot
 .
 .
 ```
