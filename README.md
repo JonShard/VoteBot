@@ -1,9 +1,9 @@
 # Votebot 
-A discord bot for voting on karaoke songs for VRChat worlds in a discord channel.
+A discord bot for voting on karaoke songs for VRChat worlds.
 
 ## About
-VRChat is a PC game for taking talking with other people using with or without a virtual reality headset ([VRChat](https://www.vrchat.com/)). One of the things people get up to in this game is karaoke.
-Votebot is a discord bot that lets people use discord to vote on which songs should be present in the karaoke world. It gathers votes from a discord text channel and sends SQL queries to a database managing the songs within the karaoke world.
+VRChat is a PC game for talking to other people with or without a virtual reality headset ([VRChat](https://www.vrchat.com/)). One of the things people get up to in this game is karaoke.
+Votebot is a bot that lets people use discord to vote on which songs should be present in the karaoke world. It gathers votes from a discord text channel and sends SQL queries to a database managing the songs within the karaoke world. 
 
 ## Usage
 Votebot can be triggered by a user with the proper role.  
