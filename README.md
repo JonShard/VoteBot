@@ -30,9 +30,9 @@ Votebot is currently in development.
 - [ ] !closeVote command.
 - [ ] !search command.
 - [x] !setChannel command.
-- [ ] !setSongLimit command. 
-- [ ] !setVoteCount command.
-- [ ] !setPatreonVoteCount command.
+- [x] !setSongLimit command. 
+- [x] !setVoteCount command.
+- [x] !setPatreonVoteCount command.
 
 ## Installation
 ``` bash

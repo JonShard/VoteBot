@@ -1,4 +1,5 @@
 botToken: string      # Randomly generated string from discord.
+songLimit: int        # The number of top voted songs to include in the next iteration of the world.
 votesPerUser: int     # Every use gets this number of notes.
 votesPerPatreon: int  # Paterons gets this number of extra votes.
 textChannelID: string # ID of the text channel the bot should respond in.

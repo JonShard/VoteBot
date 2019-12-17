@@ -16,6 +16,7 @@ const FileName = "config.yml"
 // Token contains the authorization token for communicating with discord.
 type Config struct {
 	BotToken        string `yaml:"botToken"`
+	SongLimit       int    `yaml:"songLimit"`
 	VotesPerUser    int    `yaml:"votesPerUser"`
 	VotesPerPateron int    `yaml:"votesPerPatreon"`
 	ChannelID       string `yaml:"textChannelID"`

@@ -3,6 +3,7 @@ package bot
 import (
 	"errors"
 	"fmt"
+	"strconv"
 	"strings"
 	"time"
 
@@ -122,15 +123,15 @@ func RouterHandler(s *discordgo.Session, m *discordgo.MessageCreate) {
 		break
 
 	case "!setsonglimit":
-
+		err = SetConfigInt(command, "Song limit", &Cfg.SongLimit, s, m)
 		break
 
 	case "!setvotecount":
-
+		err = SetConfigInt(command, "Vote count", &Cfg.VotesPerUser, s, m)
 		break
 
 	case "!setpateronvotecount":
-
+		err = SetConfigInt(command, "Patreon vote count", &Cfg.VotesPerPateron, s, m)
 		break
 	}
 
@@ -154,7 +155,30 @@ func SetChannel(command []string, s *discordgo.Session, m *discordgo.MessageCrea
 		return errors.New("can not set a text channel that is not within a guild")
 	}
 	Cfg.ChannelID = m.ChannelID
-	Cxt.Session.ChannelMessageSend(m.ChannelID, "New text channel set to "+channel.Name)
-	fmt.Println("New text channel set to \"" + channel.Name + "\" in guild with ID: " + guildID)
+	WriteConfigFile()
+	s.ChannelMessageSend(m.ChannelID, "New text channel set to "+channel.Name)
+	fmt.Println("Text channel set to \"" + channel.Name + "\" in guild with ID: " + guildID)
+	return nil
+}
+
+// SetConfigInt sets and integer in the config struct to a new a value and saves the config to disk.
+func SetConfigInt(command []string, name string, value *int, s *discordgo.Session, m *discordgo.MessageCreate) error {
+
+	if !hasRole(m.Member, Cfg.MasterRoleID) {
+		return errors.New("user is missing required role to set vote count")
+	}
+
+	if len(command) < 2 {
+		return errors.New("missing argument")
+	}
+	num, err := strconv.Atoi(command[1])
+	if err != nil {
+		return errors.New("unable to to parse input(" + name + ") to int")
+	}
+
+	*value = num
+	WriteConfigFile()
+	s.ChannelMessageSend(m.ChannelID, name+" set to "+command[1])
+	fmt.Println(name + " set to " + command[1])
 	return nil
 }
