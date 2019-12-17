@@ -19,6 +19,7 @@ type Config struct {
 	VotesPerUser    int    `yaml:"votesPerUser"`
 	VotesPerPateron int    `yaml:"votesPerPatreon"`
 	ChannelID       string `yaml:"textChannelID"`
+	MasterRoleID    string `yaml:"masterRoleID"`
 }
 
 // Cfg contains the global configuration for the bot.
@@ -47,7 +48,6 @@ func WriteConfigFile() {
 		fmt.Printf("Could not marshal config struct: err #%v", err)
 		return
 	}
-
 	err = ioutil.WriteFile(FileName, configText, os.FileMode(int(0777)))
 	if err != nil {
 		fmt.Printf("Could not write config file: err #%v", err)

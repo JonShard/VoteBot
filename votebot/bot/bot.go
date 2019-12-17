@@ -9,10 +9,14 @@ import (
 	"github.com/bwmarrin/discordgo"
 )
 
-const helpText = "Votebot manages voting on what songs are available. Commands:\n !help Prints this help text.\nMORE"
+const helpText = `Votebot manages voting on what songs are available. Commands:
+**!help** Prints this help text.
+**!vote** {song number} Votes for a song by its number.
+**!displayList** Prints the entire list of available songs.
+**!search** {text} Search for a song with a sub-stirng of the title or artist.`
 const sorryText = "Sorry, something went wrong there."
 
-// Context holds the neccesary information to communicate with hte server.
+// Context holds the neccesary information to communicate with the server.
 type Context struct {
 	StartTime time.Time
 	Session   *discordgo.Session
@@ -55,6 +59,16 @@ func parseMessage(m *discordgo.MessageCreate) ([]string, error) {
 	return substrings, nil
 }
 
+func hasRole(member *discordgo.Member, role string) bool {
+
+	for _, r := range member.Roles {
+		if r == role {
+			return true
+		}
+	}
+	return false
+}
+
 // RouterHandler is responsible for parsing the users command and rounding it to the correct function.
 func RouterHandler(s *discordgo.Session, m *discordgo.MessageCreate) {
 
@@ -73,7 +87,7 @@ func RouterHandler(s *discordgo.Session, m *discordgo.MessageCreate) {
 
 	// SetChannel is the only command that is not spesific to the slected channel. Special case.
 	if m.ChannelID != Cfg.ChannelID {
-		if command[0] == "!setChannel" {
+		if strings.ToLower(command[0]) == "!setchannel" {
 			err = SetChannel(command, s, m)
 		}
 		return
@@ -88,27 +102,35 @@ func RouterHandler(s *discordgo.Session, m *discordgo.MessageCreate) {
 		break
 
 	case "!displaylist":
+
 		break
 
 	case "!vote":
+
 		break
 
 	case "!search":
+
 		break
 
 	case "!openvotes":
+
 		break
 
 	case "!closevotes":
+
 		break
 
 	case "!setsonglimit":
+
 		break
 
 	case "!setvotecount":
+
 		break
 
 	case "!setpateronvotecount":
+
 		break
 	}
 
@@ -120,6 +142,10 @@ func RouterHandler(s *discordgo.Session, m *discordgo.MessageCreate) {
 
 // SetChannel changes the channelID the bot looks for messages in.
 func SetChannel(command []string, s *discordgo.Session, m *discordgo.MessageCreate) error {
+
+	if !hasRole(m.Member, Cfg.MasterRoleID) {
+		return errors.New("user is missing required role to set channel")
+	}
 
 	channel, _ := Cxt.Session.Channel(m.ChannelID) // We are guarantied the channel exist.
 	guildID := channel.GuildID

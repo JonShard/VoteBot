@@ -2,3 +2,4 @@ botToken: string      # Randomly generated string from discord.
 votesPerUser: int     # Every use gets this number of notes.
 votesPerPatreon: int  # Paterons gets this number of extra votes.
 textChannelID: string # ID of the text channel the bot should respond in.
+masterRoleID: string  # ID of the role master role used to start and close votes.
