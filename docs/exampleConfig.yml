@@ -1,6 +1,12 @@
-botToken: string      # Randomly generated string from discord.
-songLimit: int        # The number of top voted songs to include in the next iteration of the world.
-votesPerUser: int     # Every use gets this number of notes.
-votesPerPatreon: int  # Paterons gets this number of extra votes.
-textChannelID: string # ID of the text channel the bot should respond in.
-masterRoleID: string  # ID of the role master role used to start and close votes.
+botToken: string         # Randomly generated string from discord.
+database: string         # Name of the SQL database.
+databaseIP: string       # IP and port to the database.
+databaseUser: string     
+databasePassword: string 
+
+# Unique per discord server:
+songLimit: int           # The number of top voted songs to include in the next iteration of the world.
+votesPerUser: int        # Every use gets this number of notes.
+votesPerPatreon: int     # Paterons gets this number of extra votes.
+textChannelID: string    # ID of the text channel the bot should respond in.
+masterRoleID: string     # ID of the role master role used to start and close votes.
