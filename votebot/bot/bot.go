@@ -1,6 +1,8 @@
 package bot
 
 import (
+	"Votebot/votebot/cfg"
+	"Votebot/votebot/db"
 	"errors"
 	"fmt"
 	"strconv"
@@ -33,7 +35,7 @@ func Init() {
 	Cxt.StartTime = time.Now()
 
 	// Create a new Discord session using the provided bot token.
-	dg, err := discordgo.New("Bot " + Cfg.BotToken)
+	dg, err := discordgo.New("Bot " + cfg.Cfg.BotToken)
 	if err != nil {
 		fmt.Println("error creating Discord session,", err)
 		return
@@ -87,7 +89,7 @@ func RouterHandler(s *discordgo.Session, m *discordgo.MessageCreate) {
 	}
 
 	// SetChannel is the only command that is not spesific to the slected channel. Special case.
-	if m.ChannelID != Cfg.ChannelID {
+	if m.ChannelID != cfg.Cfg.ChannelID {
 		if strings.ToLower(command[0]) == "!setchannel" {
 			err = SetChannel(command, s, m)
 		}
@@ -96,13 +98,22 @@ func RouterHandler(s *discordgo.Session, m *discordgo.MessageCreate) {
 
 	switch strings.ToLower(command[0]) {
 	case "!hello":
-		s.ChannelMessageSend(m.ChannelID, "World!")
+		songs, err := db.GetAllSongs()
+		if err != nil {
+			fmt.Printf("Something went wrong with db: %v", err)
+		}
+
+		s.ChannelMessageSend(m.ChannelID, "World! Songs:"+strconv.Itoa(len(songs)))
 		break
 	case "!help":
 		s.ChannelMessageSend(m.ChannelID, helpText)
 		break
 
-	case "!displaylist":
+	case "!showCurrentSongs":
+
+		break
+
+	case "!showAllSongs":
 
 		break
 
@@ -123,15 +134,15 @@ func RouterHandler(s *discordgo.Session, m *discordgo.MessageCreate) {
 		break
 
 	case "!setsonglimit":
-		err = SetConfigInt(command, "Song limit", &Cfg.SongLimit, s, m)
+		err = SetConfigInt(command, "Song limit", &cfg.Cfg.SongLimit, s, m)
 		break
 
 	case "!setvotecount":
-		err = SetConfigInt(command, "Vote count", &Cfg.VotesPerUser, s, m)
+		err = SetConfigInt(command, "Vote count", &cfg.Cfg.VotesPerUser, s, m)
 		break
 
 	case "!setpateronvotecount":
-		err = SetConfigInt(command, "Patreon vote count", &Cfg.VotesPerPateron, s, m)
+		err = SetConfigInt(command, "Patreon vote count", &cfg.Cfg.VotesPerPateron, s, m)
 		break
 	}
 
@@ -144,7 +155,7 @@ func RouterHandler(s *discordgo.Session, m *discordgo.MessageCreate) {
 // SetChannel changes the channelID the bot looks for messages in.
 func SetChannel(command []string, s *discordgo.Session, m *discordgo.MessageCreate) error {
 
-	if !hasRole(m.Member, Cfg.MasterRoleID) {
+	if !hasRole(m.Member, cfg.Cfg.MasterRoleID) {
 		return errors.New("user is missing required role to set channel")
 	}
 
@@ -154,8 +165,8 @@ func SetChannel(command []string, s *discordgo.Session, m *discordgo.MessageCrea
 		fmt.Println("User tried to use setChannel in DMs.")
 		return errors.New("can not set a text channel that is not within a guild")
 	}
-	Cfg.ChannelID = m.ChannelID
-	WriteConfigFile()
+	cfg.Cfg.ChannelID = m.ChannelID
+	cfg.WriteConfigFile()
 	s.ChannelMessageSend(m.ChannelID, "New text channel set to "+channel.Name)
 	fmt.Println("Text channel set to \"" + channel.Name + "\" in guild with ID: " + guildID)
 	return nil
@@ -164,7 +175,7 @@ func SetChannel(command []string, s *discordgo.Session, m *discordgo.MessageCrea
 // SetConfigInt sets and integer in the config struct to a new a value and saves the config to disk.
 func SetConfigInt(command []string, name string, value *int, s *discordgo.Session, m *discordgo.MessageCreate) error {
 
-	if !hasRole(m.Member, Cfg.MasterRoleID) {
+	if !hasRole(m.Member, cfg.Cfg.MasterRoleID) {
 		return errors.New("user is missing required role to set vote count")
 	}
 
@@ -177,7 +188,7 @@ func SetConfigInt(command []string, name string, value *int, s *discordgo.Sessio
 	}
 
 	*value = num
-	WriteConfigFile()
+	cfg.WriteConfigFile()
 	s.ChannelMessageSend(m.ChannelID, name+" set to "+command[1])
 	fmt.Println(name + " set to " + command[1])
 	return nil

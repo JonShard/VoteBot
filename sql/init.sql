@@ -4,7 +4,6 @@ USE votebotdb;
 CREATE TABLE songs
 (
     ID          SMALLINT     NOT NULL AUTO_INCREMENT,
-    link        varchar(256) NOT NULL,
     cover       varchar(128) NOT NULL, -- Path to image file.
     timestamp   datetime     NOT NULL,
     title       varchar(64)  NOT NULL,

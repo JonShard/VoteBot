@@ -1,4 +1,4 @@
-package bot
+package cfg
 
 import (
 	"fmt"

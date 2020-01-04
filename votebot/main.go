@@ -2,6 +2,7 @@ package main
 
 import (
 	"Votebot/votebot/bot"
+	"Votebot/votebot/cfg"
 	"Votebot/votebot/db"
 	"fmt"
 	"os"
@@ -11,7 +12,7 @@ import (
 
 func main() {
 
-	bot.ReadConfigFile()
+	cfg.ReadConfigFile()
 	bot.Init()
 	db.Init()
 
@@ -23,5 +24,5 @@ func main() {
 
 	// Cleanly close down the Discord session.
 	bot.Cxt.Session.Close()
-	bot.WriteConfigFile()
+	cfg.WriteConfigFile()
 }
