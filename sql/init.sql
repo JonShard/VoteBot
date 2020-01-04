@@ -21,15 +21,24 @@ CREATE TABLE users
     PRIMARY KEY(ID)
 );
 
+CREATE TABLE iterations
+(
+    ID          SMALLINT NOT NULL AUTO_INCREMENT,
+    guildID     char(32) NOT NULL,
+    list        text NOT NULL,
+    PRIMARY KEY(ID)
+);
+
 CREATE TABLE votes
 (
     ID          SMALLINT NOT NULL AUTO_INCREMENT,
-    iteration   SMALLINT NOT NULL, -- Increments by one every time !openVotes is called by a songMaster.
+    iterationID SMALLINT NOT NULL, -- Increments by one every time !openVotes is called by a songMaster.
     userID      SMALLINT NOT NULL,
     songID      SMALLINT NOT NULL,
+    guildID     SMALLINT NOT NULL,
     timestamp   datetime NOT NULL,
     PRIMARY KEY(ID),
-    FOREIGN KEY(userID) REFERENCES users (ID),
-    FOREIGN KEY(songID) REFERENCES songs (ID)
+    FOREIGN KEY(iterationID) REFERENCES iterations(ID),
+    FOREIGN KEY(userID) REFERENCES users(ID),
+    FOREIGN KEY(songID) REFERENCES songs(ID)
 );
-

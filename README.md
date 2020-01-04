@@ -1,11 +1,14 @@
 # Votebot 
+
 A discord bot for voting on karaoke songs for VRChat worlds.
 
 ## About
+
 VRChat is a PC game for talking to other people with or without a virtual reality headset ([VRChat](https://www.vrchat.com/)). One of the things people get up to in this game is karaoke.
-Votebot is a bot that lets people use discord to vote on which songs should be present in the karaoke world. It gathers votes from a discord text channel and sends SQL queries to a database managing the songs within the karaoke world. 
+Votebot is a bot that lets people use discord to vote on which songs should be present in the karaoke world. It gathers votes from a discord text channel and sends SQL queries to a database managing the songs within the karaoke world.
 
 ## Usage
+
 Votebot can be triggered by a user with the proper role.  
 
 | Commands | Arguments | Required Role | Description |  
@@ -22,7 +25,9 @@ Votebot can be triggered by a user with the proper role.
 
 
 ## Roadmap
+
 Votebot is currently in development.
+
 - [x] !helloWorld command.
 - [ ] !displayList command.
 - [ ] !openVote command, with song data from database.
@@ -30,19 +35,18 @@ Votebot is currently in development.
 - [ ] !closeVote command.
 - [ ] !search command.
 - [x] !setChannel command.
-- [x] !setSongLimit command. 
+- [x] !setSongLimit command.
 - [x] !setVoteCount command.
 - [x] !setPatreonVoteCount command.
 
 ## Installation
+
 ``` bash
 git clone repo
 cd Votebot
-make
-cp docs/exampleConfig.yml bin/config.yml
-# Configure bin/config.yml
-cd bin
-./Votebot
+make new
+nano bin/config.yml # Configure bin/config.yml
+make run
 .
 .
 ```

@@ -2,6 +2,7 @@ package main
 
 import (
 	"Votebot/votebot/bot"
+	"Votebot/votebot/db"
 	"fmt"
 	"os"
 	"os/signal"
@@ -12,6 +13,7 @@ func main() {
 
 	bot.ReadConfigFile()
 	bot.Init()
+	db.Init()
 
 	// Wait here until CTRL-C or other term signal is received.
 	fmt.Println("Bot is now running. Press CTRL-C to exit.")
